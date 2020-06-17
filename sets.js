@@ -27,6 +27,58 @@ function mySet() {
   this.size = function() {
     return collection.length
   }
+
+  this.union = function(otherSet) {
+    var unionSet = new mySet();
+    var firstSet = this.values();
+    var secondSet = otherSet.values();
+
+    firstSet.forEach(function(e){
+      unionSet.add(e);
+    })
+    secondSet.forEach(function(e){
+      unionSet.add(e);
+    })
+    return unionSet;
+  }
+
+  this.intersection = function(otherSet) {
+    var intersectionSet = new mySet();
+    var firstSet = this.values();
+
+    firstSet.forEach(function(e){
+      if(otherSet.has(e)) {
+        intersectionSet.add(e);
+      }
+    });
+    return intersectionSet;
+  };
+
+  this.difference = function(otherSet) {
+    var differenceSet = new mySet();
+    var firstSet = this.values();
+
+    firstSet.forEach(function(e){
+      if(!otherSet.has(e)) {
+        differenceSet.add(e);
+      }
+    });
+    return differenceSet;
+  }
+
+  this.subset = function(otherSet) {
+    var firstSet = this.values();
+    return firstSet.every(function(value) {
+      return otherSet.has(value);
+    })
+  }
+
+  // this.subset = function(otherSet) {
+  //   var firstSet = this.values();
+  //   return firstSet.every(function(value) {
+  //     return otherSet.has(value);
+  //   });
+  // };
 }
 
 let setA = new mySet();
@@ -46,11 +98,25 @@ console.log(setA.has("a"));
 console.log(setB.has("a"));
 
 // Remove Value and Print Remaining Values -------
-setA.remove("c");
-setB.remove("c");
+setA.remove("d");
+setB.remove("d");
 console.log(setA.values());
 console.log(setB.values());
 
 console.log(setA.size());
 console.log(setB.size());
 
+// Add Value and do union of two sets -------
+setA.add("z");
+console.log(setA.union(setB).values());
+
+// Find intersection of two sets
+console.log(setA.intersection(setB).values());
+
+// Find differenceSet of two sets
+console.log(setA.difference(setB).values());
+
+// Check the subset
+console.log(setA.subset(setB));
+
+// comment the line 110 and see the magic 

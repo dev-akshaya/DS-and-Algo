@@ -72,13 +72,6 @@ function mySet() {
       return otherSet.has(value);
     })
   }
-
-  // this.subset = function(otherSet) {
-  //   var firstSet = this.values();
-  //   return firstSet.every(function(value) {
-  //     return otherSet.has(value);
-  //   });
-  // };
 }
 
 let setA = new mySet();
